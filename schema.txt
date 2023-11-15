@@ -1,0 +1,132 @@
+users [icon: user] {
+  id string pk
+  username string
+  email string
+  website string
+  password string
+  phone_number string
+  location string
+  isActive boolien
+  userType string default free
+  profileImage string
+  updated_at datetime
+  created_at datetime
+  
+}
+
+
+notification [icon: folder] {
+  id string pk
+  message string
+  reciverId string fk
+  senderId string fk
+}
+
+chat [icon: message-circle] {
+  id string pk
+  senderId string fk
+  reciverId string fk
+  red boolen
+  createdAt timestamp
+  updateAt timestamp
+}
+profileImge [icon: message-circle] {
+  id string pk
+  userId string fk
+  imageUrl url
+  createdAt timestamp
+  updateAt timestamp
+}
+
+setting [icon: mail] {
+  id string pk
+  pushNotification boolen true
+  workspaceIdworkspaceId string
+  userid string fk
+}
+
+propertyimage{
+  id string pk
+  propertyID pk
+  propertiesImages array
+  createdAt timestamp
+  updatedAt timestamp
+}
+cars[icon: car]{
+id string pk
+title string
+gearMode string
+price_per_month number
+discount number
+latitud number
+longititude number
+isActive boolen
+isTaken boolen
+images string fk
+
+}
+appartment[icon: building]{
+id string pk
+title string
+price number
+discount number
+bedAmount number
+roomamount number
+latitud number
+longititude number
+isActive boolen
+isTaken boolen
+images string fk
+propertiesId string fk
+}
+shops[icon: shopify]{
+id string pk
+title string
+monthly_price number
+discount number
+bedAmount number
+roomamount number
+latitud number
+longititude number
+isActive boolen
+isTaken boolen
+images string fk
+propertiesId string fk
+}
+room[icon: bed]{
+id string pk
+title string
+MonthlyPrice number
+discount number
+bedAmount number
+latitud number
+longititude number
+isActive boolen
+isTaken boolen
+images string fk
+
+
+}
+properties{
+  id string pk
+  userid string fk
+  itemId string fk
+  category string 
+}
+appartment.id < properties.itemId
+appartment.images < propertyimage.id
+shops.images - profileImge.id
+room.id < properties.itemId
+room.images - propertyimage.id
+shops.id < properties.itemId
+
+cars.id - properties.itemId
+cars.images < propertyimage.id
+users.id < properties.id
+notification.senderId > users.id
+notification.reciverId >users.id
+setting.userid - users.id
+users.id  <> teams.id
+profileImge.userId   - users.profileImage
+chat.reciverId <> users.id 
+
